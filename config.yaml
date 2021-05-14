@@ -1,0 +1,22 @@
+ssh_authorized_keys:
+- "github:clwillingham"
+write_files:
+- encoding: ""
+  content: |-
+    #!/bin/bash
+    echo Installing Tincd and Boot
+    mkdir -p /usr/local/bin
+    wget http://192.168.1.168:9080/tincd -O /usr/local/bin/
+    chmod +x /usr/local/bin/tincd
+    curl -L https://github.com/reddec/tinc-boot/releases/latest/download/tinc-boot_linux_amd64.tar.gz | sudo tar -xz -C /usr/local/bin/ tinc-boot
+  owner: root
+  path: /etc/local.d/tinc-boot.start
+  permissions: '0755'
+init_cmd:
+- "echo hello, init command"
+boot_cmd:
+- "echo hello, boot command"
+run_cmd:
+- "echo hello, run command"
+k3os:
+  password: rancher
